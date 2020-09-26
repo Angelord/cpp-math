@@ -5,7 +5,6 @@
 #ifndef CPP_MATH_VECTOR3_H
 #define CPP_MATH_VECTOR3_H
 
-
 #include <string>
 #include <sstream>
 
@@ -113,7 +112,7 @@ inline Vector3 operator-(const Vector3& lhs, const Vector3& rhs) {
 }
 
 // For debugging
-std::ostream& operator<<(std::ostream& os, const Vector3& vec) {
+inline std::ostream& operator<<(std::ostream& os, const Vector3& vec) {
     os << "(" << vec.x << ", " << vec.y << ", " << vec.z << ")";
     return os;
 }

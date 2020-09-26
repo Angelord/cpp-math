@@ -2,7 +2,6 @@
 // Created by Almoxis on 4/19/2020.
 //
 
-#include <iostream>
 #include "catch.hpp"
 #include "../src/Vector3.h"
 
