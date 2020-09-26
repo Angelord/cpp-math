@@ -11,7 +11,9 @@
 
 struct Vector3;
 
-Vector3 operator-(const Vector3& lhs, const Vector3& rhs);
+inline Vector3 operator-(const Vector3& lhs, const Vector3& rhs);
+
+inline Vector3 operator/(const Vector3& lhs, float rhs);
 
 struct Vector3 {
 
@@ -36,7 +38,7 @@ struct Vector3 {
     }
 
     static float Distance(const Vector3& lhs, const Vector3& rhs) {
-        return (rhs - lhs).GetMagnitude();
+        return (rhs - lhs).Magnitude();
     }
 
     void Set(float x, float y, float z) {
@@ -45,11 +47,15 @@ struct Vector3 {
         this->z = z;
     }
 
-    float GetMagnitude() {
-        return sqrt(GetMagnitudeSq());
+    Vector3 Normalized() const {
+        return ((*this) / this->Magnitude());
     }
 
-    float GetMagnitudeSq() {
+    float Magnitude() const {
+        return sqrt(MagnitudeSq());
+    }
+
+    float MagnitudeSq() const {
         return x * x + y * y + z * z;
     }
 
@@ -82,33 +88,34 @@ struct Vector3 {
     }
 };
 
-std::ostream& operator<<(std::ostream& os, const Vector3& vec) {
-    os << "(" << vec.x << ", " << vec.y << ", " << vec.z << ")";
-    return os;
-}
-
-Vector3 operator*(const Vector3& lhs, float rhs) {
+inline Vector3 operator*(const Vector3& lhs, float rhs) {
     return Vector3(lhs.x * rhs, lhs.y * rhs, lhs.z * rhs);
 }
 
-Vector3 operator*(float lhs, const Vector3& rhs) {
+inline Vector3 operator*(float lhs, const Vector3& rhs) {
     return operator*(rhs, lhs);
 }
 
-Vector3 operator/(const Vector3& lhs, float rhs) {
+inline Vector3 operator/(const Vector3& lhs, float rhs) {
     return Vector3(lhs.x / rhs, lhs.y / rhs, lhs.z / rhs);
 }
 
-bool operator==(const Vector3& lhs, const Vector3& rhs) {
+inline bool operator==(const Vector3& lhs, const Vector3& rhs) {
     return lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z;
 }
 
-Vector3 operator+(const Vector3& lhs, const Vector3& rhs) {
+inline Vector3 operator+(const Vector3& lhs, const Vector3& rhs) {
     return Vector3(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z);
 }
 
-Vector3 operator-(const Vector3& lhs, const Vector3& rhs) {
+inline Vector3 operator-(const Vector3& lhs, const Vector3& rhs) {
     return Vector3(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z);
+}
+
+// For debugging
+std::ostream& operator<<(std::ostream& os, const Vector3& vec) {
+    os << "(" << vec.x << ", " << vec.y << ", " << vec.z << ")";
+    return os;
 }
 
 #endif //CPP_MATH_VECTOR3_H

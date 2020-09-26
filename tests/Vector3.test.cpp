@@ -68,13 +68,13 @@ TEST_CASE("Compound Vector Subtraction") {
 TEST_CASE("Test Get Magnitude") {
     Vector3 lhs(4, 3, 0);
 
-    REQUIRE(lhs.GetMagnitude() == 5.0f);
+    REQUIRE(lhs.Magnitude() == 5.0f);
 }
 
 TEST_CASE("Test Get Magnitude Sq") {
     Vector3 lhs(4, 3, 0);
 
-    REQUIRE(lhs.GetMagnitudeSq() == 25.0f);
+    REQUIRE(lhs.MagnitudeSq() == 25.0f);
 }
 
 TEST_CASE("Test Dot Product") {
@@ -105,4 +105,11 @@ TEST_CASE("Access member by index") {
     REQUIRE(vec[0] == 1);
     REQUIRE(vec[1] == 2);
     REQUIRE(vec[2] == 3);
+}
+
+TEST_CASE("Can be normalized") {
+
+    REQUIRE(Vector3(5, 6, 3).Normalized().Magnitude() == 1);
+    REQUIRE(Vector3(-15, -3, 3).Normalized().Magnitude() == 1);
+    REQUIRE(Vector3(215, 4, -50).Normalized().Magnitude() == 1);
 }
