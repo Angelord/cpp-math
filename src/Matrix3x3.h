@@ -11,7 +11,8 @@ struct Matrix3x3 {
 
     public:
 
-        Matrix3x3() = default;
+        Matrix3x3() : n() {
+        }
 
         Matrix3x3(float n00, float n01, float n02,
                   float n10, float n11, float n12,
@@ -47,5 +48,25 @@ struct Matrix3x3 {
 
         float n[3][3];
 };
+
+inline Matrix3x3 operator * (const Matrix3x3& lhs, const Matrix3x3& rhs) {
+    Matrix3x3 result;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            for (int u = 0; u < 3; u++)
+                result(i, j) += lhs[i][u] * rhs[u][j];
+        }
+    }
+
+    return result;
+}
+
+inline Vector3 operator * (const Matrix3x3& m, const Vector3& v) {
+    return Vector3(
+            m(0, 0) * v.x + m(0, 1) * v.y + m(0, 2) * v.z,
+            m(1, 0) * v.x + m(1, 1) * v.y + m(1, 2) * v.z,
+            m(2, 0) * v.x + m(2, 1) * v.y + m(2, 2) * v.z
+            );
+}
 
 #endif //CPP_MATH_MATRIX3X3_H
