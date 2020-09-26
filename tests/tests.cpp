@@ -2,25 +2,5 @@
 // Created by Almoxis on 4/19/2020.
 //
 
-#include "Vector3.test.h"
-
-int main() {
-
-    Vector3Tests::TestScalarMultiplication();
-
-    Vector3Tests::TestScalarDivision();
-
-    Vector3Tests::TestVectorAddition();
-
-    Vector3Tests::TestVectorSubtraction();
-
-    Vector3Tests::TestGetMagnitude();
-
-    Vector3Tests::TestGetMagnitudeSq();
-
-    Vector3Tests::TestDotProduct();
-
-    Vector3Tests::TestCrossProduct();
-
-    Vector3Tests::TestDistance();
-}
+#define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
+#include "catch.hpp"
