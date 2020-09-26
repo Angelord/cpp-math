@@ -72,6 +72,14 @@ struct Vector3 {
         x -= rhs.x; y -= rhs.y; z -= rhs.z;
         return *this;
     }
+
+    float& operator[](size_t i) {
+        return ((&x)[i]);
+    }
+
+    const float& operator[](size_t i) const {
+        return ((&x)[i]);
+    }
 };
 
 std::ostream& operator<<(std::ostream& os, const Vector3& vec) {
