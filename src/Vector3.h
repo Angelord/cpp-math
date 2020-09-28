@@ -10,6 +10,10 @@
 
 struct Vector3;
 
+inline Vector3 operator*(const Vector3& lhs, float rhs);
+
+inline Vector3 operator*(float lhs, const Vector3& rhs);
+
 inline Vector3 operator-(const Vector3& lhs, const Vector3& rhs);
 
 inline Vector3 operator/(const Vector3& lhs, float rhs);
@@ -26,6 +30,14 @@ struct Vector3 {
 
     static float Dot(const Vector3& lhs, const Vector3& rhs) {
         return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z;
+    }
+
+    static Vector3 Project(const Vector3& a, const Vector3& b) {
+        return (b * Dot(a, b) / Dot(b, b));
+    }
+
+    static Vector3 Reject(const Vector3& a, const Vector3& b) {
+        return (a - b * (Dot(a, b) / Dot(b, b)));
     }
 
     static Vector3 Cross(const Vector3& lhs, const Vector3& rhs) {
