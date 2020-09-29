@@ -44,6 +44,12 @@ struct Matrix3x3 {
             return (*reinterpret_cast<const Vector3 *>(n[j]));
         }
 
+        float Determinant() {
+            return (n[0, 0] * (n[1, 1] * n[2, 2] - n[1, 2] * n[2, 1])
+                  + n[0, 1] * (n[1, 2] * n[2, 0] - n[1, 0] * n[2, 2])
+                  + n[0, 2] * (n[1, 0] * n[2, 1] - n[1, 1] * n[2, 0]));
+        }
+
     private:
 
         float n[3][3];

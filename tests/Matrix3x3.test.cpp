@@ -5,7 +5,7 @@
 #include "catch.hpp"
 #include "../src/Matrix3x3.h"
 
-TEST_CASE("Allows data access via indexing", "Matrix4x4") {
+TEST_CASE("Allows data access via indexing", "Matrix3x3") {
 
     Matrix3x3 mat(
             1, 2, 3,
@@ -24,7 +24,7 @@ TEST_CASE("Allows data access via indexing", "Matrix4x4") {
     REQUIRE(mat(2, 2) == 9);
 }
 
-TEST_CASE("Allows data access via vector indexing", "Matrix4x4") {
+TEST_CASE("Allows data access via vector indexing", "Matrix3x3") {
 
     Matrix3x3 mat(
             1, 2, 3,
@@ -37,7 +37,7 @@ TEST_CASE("Allows data access via vector indexing", "Matrix4x4") {
     REQUIRE(mat[2] == Vector3(7, 8, 9));
 }
 
-TEST_CASE("Matrix Multiplication", "Matrix4x3") {
+TEST_CASE("Matrix Multiplication", "Matrix3x3") {
 
     Matrix3x3 mat(
             1, 2, 3,
@@ -51,7 +51,7 @@ TEST_CASE("Matrix Multiplication", "Matrix4x3") {
     REQUIRE(result(0, 1) == 36);
 }
 
-TEST_CASE("Matrix-Vector Multiplication", "Matrix4x3") {
+TEST_CASE("Matrix-Vector Multiplication", "Matrix3x3") {
 
     Matrix3x3 mat(
             1, 2, 3,
@@ -64,4 +64,16 @@ TEST_CASE("Matrix-Vector Multiplication", "Matrix4x3") {
     REQUIRE(result.x == 14);
     REQUIRE(result.y == 32);
     REQUIRE(result.z == 50);
+}
+
+TEST_CASE("Calculates the Determinant", "Matrix3x3") {
+
+    Matrix3x3 mat(
+            1, 2, 3,
+            4, 5, 6,
+            7, 8, 9
+    );
+
+
+    REQUIRE(mat.Determinant() == 0);
 }
