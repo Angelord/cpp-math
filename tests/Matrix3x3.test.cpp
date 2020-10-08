@@ -4,6 +4,7 @@
 
 #include "catch.hpp"
 #include "../src/Matrix3x3.h"
+#include "../src/Utils.h"
 
 TEST_CASE("Allows data access via indexing", "Matrix3x3") {
 
@@ -74,6 +75,24 @@ TEST_CASE("Calculates the Determinant", "Matrix3x3") {
             7, 8, 9
     );
 
-
     REQUIRE(mat.Determinant() == 0);
+}
+
+#include "iostream"
+
+TEST_CASE("Calculates the Inverse", "Matrix3x3") {
+
+    Matrix3x3 mat(
+            1, 2, 2,
+            4, 5, 6,
+            7, 2, 9
+    );
+
+    Matrix3x3 inverse = mat.Inverse();
+
+    std::cout << "Identity : " << inverse(0, 2) << std::endl;
+
+    REQUIRE(Utils::FloatEquals(inverse(0, 2), 3.0f, 0.000001f));
+    REQUIRE(Utils::FloatEquals(inverse(0, 1), -0.666f, 0.01f));
+    REQUIRE(Utils::FloatEquals(inverse(2, 2), 0.333f, 0.01f));
 }

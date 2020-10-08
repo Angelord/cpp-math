@@ -7,6 +7,12 @@
 
 #include "Vector3.h"
 
+struct Matrix3x3;
+
+inline Matrix3x3 operator * (const Matrix3x3& lhs, const Matrix3x3& rhs);
+
+inline Vector3 operator * (const Matrix3x3& m, const Vector3& v);
+
 struct Matrix3x3 {
 
     public:
@@ -44,14 +50,32 @@ struct Matrix3x3 {
             return (*reinterpret_cast<const Vector3 *>(n[j]));
         }
 
-        float Determinant() {
-            return (n[0, 0] * (n[1, 1] * n[2, 2] - n[1, 2] * n[2, 1])
-                  + n[0, 1] * (n[1, 2] * n[2, 0] - n[1, 0] * n[2, 2])
-                  + n[0, 2] * (n[1, 0] * n[2, 1] - n[1, 1] * n[2, 0]));
+        float Determinant() const {
+            return (n[0][0] * (n[1][1] * n[2][2] - n[1][2] * n[2][1])
+                  + n[0][1] * (n[1][2] * n[2][0] - n[1][0] * n[2][2])
+                  + n[0][2] * (n[1][0] * n[2][1] - n[1][1] * n[2][0]));
+        }
+
+        Matrix3x3 Inverse() const {
+
+            const Vector3& a = (*this)[0];
+            const Vector3& b = (*this)[1];
+            const Vector3& c = (*this)[2];
+
+            Vector3 r0 = Vector3::Cross(b, c);
+            Vector3 r1 = Vector3::Cross(c, a);
+            Vector3 r2 = Vector3::Cross(a, b);
+
+            float invDet = 1.0f / Vector3::Dot(r2, c);
+
+            return (Matrix3x3(r0.x * invDet, r0.y * invDet, r0.z * invDet,
+                              r1.x * invDet, r1.y * invDet, r1.z * invDet,
+                              r2.x * invDet, r2.y * invDet, r2.z * invDet));
         }
 
     private:
 
+        // Note : We use column vectors. So [0, 2] is the bottom left entry.
         float n[3][3];
 };
 
