@@ -43,4 +43,24 @@ inline Matrix3x3 MakeRotationZ(float t) {
             ));
 }
 
+inline Matrix3x3 MakeRotation(float t, const Vector3& a) {
+    float c = cos(t);
+    float s = sin(t);
+    float d = 1.0f - c;
+
+    float x = a.x * d;
+    float y = a.y * d;
+    float z = a.z * d;
+
+    float axay = x * a.y;
+    float axaz = x * a.z;
+    float ayaz = y * a.z;
+
+    return (
+            Matrix3x3(c + x * a.x, axay - s * a.z, axaz + s * a.y,
+                    axay + s * a.z, c + y * a.y, ayaz - s * a.x,
+                    axaz - s * a.y, ayaz + s * a.x, c + z * a.z)
+            );
+}
+
 #endif //CPP_MATH_ROTATION_H
