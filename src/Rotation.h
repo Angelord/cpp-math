@@ -6,6 +6,7 @@
 #define CPP_MATH_ROTATION_H
 
 #include "Matrix3x3.h"
+#include "Vector3.h"
 
 inline Matrix3x3 MakeRotationX(float t) {
 
@@ -16,7 +17,7 @@ inline Matrix3x3 MakeRotationX(float t) {
             1.0f, 0.0f, 0.0f,
             0.0f, c, -s,
             0.0f, s, c
-            ));
+    ));
 }
 
 inline Matrix3x3 MakeRotationY(float t) {
@@ -28,7 +29,7 @@ inline Matrix3x3 MakeRotationY(float t) {
             c, 0.0f, s,
             0.0f, 1.0f, 0.0f,
             -s, 0.0f, c
-            ));
+    ));
 }
 
 inline Matrix3x3 MakeRotationZ(float t) {
@@ -40,10 +41,10 @@ inline Matrix3x3 MakeRotationZ(float t) {
             c, -s, 0.0f,
             s, c, 0.0f,
             0.0f, 0.0f, 1.0f
-            ));
+    ));
 }
 
-inline Matrix3x3 MakeRotation(float t, const Vector3& a) {
+inline Matrix3x3 MakeRotation(float t, const Vector3 &a) {
     float c = cos(t);
     float s = sin(t);
     float d = 1.0f - c;
@@ -58,9 +59,9 @@ inline Matrix3x3 MakeRotation(float t, const Vector3& a) {
 
     return (
             Matrix3x3(c + x * a.x, axay - s * a.z, axaz + s * a.y,
-                    axay + s * a.z, c + y * a.y, ayaz - s * a.x,
-                    axaz - s * a.y, ayaz + s * a.x, c + z * a.z)
-            );
+                      axay + s * a.z, c + y * a.y, ayaz - s * a.x,
+                      axaz - s * a.y, ayaz + s * a.x, c + z * a.z)
+    );
 }
 
 #endif //CPP_MATH_ROTATION_H

@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Vector3.h"
 #include "Rotation.h"
+#include "Reflection.h"
+#include "Scale.h"
 
 int main() {
 
