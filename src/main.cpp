@@ -1,5 +1,7 @@
 #include <iostream>
 #include "Vector3.h"
+#include "Vector4.h"
+#include "Point3.h"
 #include "Rotation.h"
 #include "Reflection.h"
 #include "Scale.h"
