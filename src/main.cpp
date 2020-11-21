@@ -6,6 +6,7 @@
 #include "Reflection.h"
 #include "Scale.h"
 #include "Skew.h"
+#include "Quaternion.h"
 
 int main() {
 
