@@ -109,5 +109,16 @@ Transform4x4 operator*(const Transform4x4 &A, const Transform4x4 &B) {
             A(2, 0) * B(0, 3) + A(2, 1) * B(1, 3) + A(2, 2) * B(2, 3) + A(2, 3)));
 }
 
+// Multiplies a Vec3 representing a normal vector as a row matrix on the right by a transform4x4 structure to
+// transform a normal vector from one coordinate system to another.
+// Note that this transform would transform a 'regular' vector form coordinate system A to B,
+// whilst a normal vector is transformed from B to A
+inline Vector3 operator *(const Vector3& n, const Transform4x4& h) {
+
+    return (Vector3(n.x * h(0, 0) + n.y * h(1, 0) + n.z * h(2, 0),
+                    n.x * h(0, 1) + n.y * h(1, 1) + n.z * h(2, 1),
+                    n.x * h(0, 2) + n.y * h(1, 2) + n.z * h(2, 2)));
+}
+
 
 #endif //CPP_MATH_TRANSFORM4X4_H
