@@ -120,5 +120,14 @@ inline Vector3 operator *(const Vector3& n, const Transform4x4& h) {
                     n.x * h(0, 2) + n.y * h(1, 2) + n.z * h(2, 2)));
 }
 
+// Multiplies a plane on the right by a Transform4x4 to transform the plane from coordinate system B
+// to coordinate system A. Note that tihs transforms a plane in the opposite sense in relation
+// to how the same matrix would transform a point from coordinate system A to coordinate system B.
+inline Plane operator*(const Plane& f, const Transform4x4& H) {
+    return (Plane(f.x * H(0, 0) + f.y * H(1, 0) + f.z * H(2, 0),
+                  f.x * H(0, 1) + f.y * H(1, 1) + f.z * H(2, 1),
+                  f.x * H(0, 2) + f.y * H(1, 2) + f.z * H(2, 2),
+                  f.x * H(0, 3) + f.y * H(1, 3) + f.z * H(2, 3) + f.w));
+}
 
 #endif //CPP_MATH_TRANSFORM4X4_H
