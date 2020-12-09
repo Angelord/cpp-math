@@ -8,6 +8,19 @@
 #include "Point3.h"
 
 
+struct Line {
+    Vector3 direction;
+    Vector3 moment;
+
+    Line() = default;
+
+    Line(float vx, float vy, float vz, float mx, float my, float mz) : direction(vx, vy, vz), moment(mx, my, mz) {
+    }
+
+    Line(const Vector3& v, const Vector3& m) : direction(v), moment(m) {
+    }
+};
+
 // If u = q - p, then |u x v| gives the area of a parallelogram. The distance d is the height of the parallelogram.
 // To find the height we divide |u x v| by |v|, which is its base.
 inline float CalculateLinePointDist(const Point3& q, const Point3& p, const Vector3& v) {
