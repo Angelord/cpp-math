@@ -6,7 +6,8 @@
 #define CPP_MATH_LINE_H
 
 #include "Point3.h"
-
+#include "Matrix3x3.h"
+#include "Transform4x4.h"
 
 struct Line {
     Vector3 direction;
@@ -18,6 +19,15 @@ struct Line {
     }
 
     Line(const Vector3& v, const Vector3& m) : direction(v), moment(m) {
+    }
+
+    static Line Transform(const Line& line, const Transform4x4& H) {
+        Matrix3x3 adj(Vector3::Cross(H[1], H[2]), Vector3::Cross(H[2], H[0]), Vector3::Cross(H[0], H[1]));
+        const Point3& t = H.GetTranslation();
+
+        Vector3 v = H * line.direction;
+        Vector3 m = adj * line.moment + Vector3::Cross(t, v);
+        return (Line(v, m));
     }
 };
 
