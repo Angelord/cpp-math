@@ -39,6 +39,11 @@ struct Vector3 {
     static Vector3 Reject(const Vector3& a, const Vector3& b) {
         return (a - b * (Dot(a, b) / Dot(b, b)));
     }
+    
+    // Reflects the vector 'b' about 'a'
+    static Vector3 Reflect(const Vector3& a, const Vector3& b) {
+        return 2 * Dot(a, b) * a - b;
+    }
 
     static Vector3 Cross(const Vector3& lhs, const Vector3& rhs) {
         return Vector3(

@@ -97,6 +97,12 @@ TEST_CASE("Test Distance") {
     REQUIRE(Vector3::Distance(Vector3(4, 0, 0), Vector3(0, 3, 0)) == 5.0f);
 }
 
+TEST_CASE("Reflection") {
+
+    REQUIRE(Vector3::Reflect(Vector3(0, 1, 0), Vector3(1, 0, 0)) == Vector3(-1, 0, 0));
+    REQUIRE(Vector3::Reflect(Vector3(1, 0, 0), Vector3(1, 0, 0)) == Vector3(1, 0, 0));
+}
+
 TEST_CASE("Access member by index") {
 
     Vector3 vec(1, 2, 3);

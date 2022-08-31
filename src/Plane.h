@@ -32,15 +32,13 @@ struct Plane {
 
     /// Calculates the line determined by point p and vector v at which two planes intersect.
     /// If the normal vectors of the planes are parallel, the function returns false.
-    static bool IntersectTwoPlanes(const Plane& f1, const Plane& f2,
-                                    Point3* p, Vector3* v) {
+    static bool IntersectTwoPlanes(const Plane& f1, const Plane& f2, Point3* p, Vector3* v) {
 
         const Vector3& n1 = f1.GetNormal();
         const Vector3& n2 = f2.GetNormal();
 
-
         *v = Vector3::Cross(n1, n2);
-        flaot det = Dot(*v, *v);
+        float det = Vector3::Dot(n1, n2);
 
         if(fabs(det) > FLT_MIN) {
             *p = (Vector3::Cross(*v, n2) * f1.w + Vector3::Cross(n1, *v) * f2.w) / det;

@@ -12,6 +12,8 @@ struct Point3 : Vector3 {
     Point3() = default;
 
     Point3(float a, float b, float c) : Vector3(a, b, c) {}
+
+    Point3(const Vector3& vec) : Vector3(vec) { }
 };
 
 inline Point3 operator+ (const Point3& a, const Vector3& b) {
